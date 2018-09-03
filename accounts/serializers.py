@@ -9,10 +9,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             required=True,
             validators=[UniqueValidator(queryset=User.objects.all())]
             )
-    username = serializers.CharField(
-            validators=[UniqueValidator(queryset=User.objects.all())]
-            )
-    password = serializers.CharField(min_length=8,write_only=True)
+    password = serializers.CharField(min_length=6,write_only=True)
 
     def validate_email(self,value):
         if not value.endswith("@pxn.one"):
@@ -21,10 +18,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
     def create(self,validated_data):
-        user = User.objects.create_user(validated_data['username'], validated_data['email'],
+        user = User.objects.create_user(validated_data['email'], validated_data['email'],
              validated_data['password'])
         return user
 
     class Meta:
         model = User
-        fields = ('url','username','password','email')
+        fields = ('url','email','password')
