@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'djcelery',
+    'taskManager',
     # 'corsheaders',
 ]
 
@@ -139,7 +141,11 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ],
 }
+CELERY_BROKER_URL = 'amqp://guest:guest@127.0.0.1:5672//' 
+# CELERY_ACCEPT_CONTENT = ['json']
+CELERY_RESULT_BACKEND = 'redis://'
 
+# CELERY_TASK_SERIALIZER = 'json'
 # CORS_ORIGIN_WHITELIST  =(
 #      'localhost:8001',
 #      'localhost:8000',

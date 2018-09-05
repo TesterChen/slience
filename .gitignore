@@ -1,0 +1,5 @@
+*.pyc
+taskManager/utils/outputs/*
+taskManager/utils/reports/*
+taskManager/utils/code_tmp/*
+
