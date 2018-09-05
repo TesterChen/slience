@@ -19,10 +19,13 @@ from django.conf.urls import include,url
 from rest_framework_jwt.views import obtain_jwt_token
 
 from rest_framework import routers
-from accounts import views
+from accounts import views as accounts_views
+from taskManager import views as taskManager_views
 
 router = routers.DefaultRouter()
-router.register(r'users',views.UserViewSet)
+router.register(r'users',accounts_views.UserViewSet)
+router.register(r'tasks',taskManager_views.PeriodicViewSet)
+router.register(r'schedules',taskManager_views.CrontabScheduleViewSet)
 
 
 urlpatterns = [
