@@ -5,3 +5,5 @@ taskManager/utils/code_tmp/*
 
 .vscode/settings.json
 */migrations/*
+reports/*
+taskManager/utils/report.zip

@@ -6,7 +6,6 @@ from taskManager.utils.scripts_version_control import update_code
 from taskManager.utils.allure_report import generate_report,output_filename,upload_report
 from robot import run
 import os
-import uuid
 
 #一期先硬编码,待项目管理功能开发完成后由task入参
 repo_name = 'PxnAutoTest'
@@ -14,9 +13,8 @@ repo_url = 'git://github.com/PengfeiInPxn/PxnAutoTest.git'
 
 
 
-@shared_task
-def main_run():
-    report_id=uuid.uuid1()
+@shared_task(bind=True)
+def main_run(self):
     #更新脚本
     script_path=update_code(repo_name,repo_url)
     #执行脚本
@@ -25,10 +23,10 @@ def main_run():
     #构建报告
     generate_report()
     #上传报告
-    upload_report("http://127.0.0.1:8000/upload/%s" % report_id)
+    upload_report("http://127.0.0.1:8000/upload/%s" % self.request.id)
     #发送报告
 
-    return report_id
 
 if __name__ =="__main__":
-    main_run()
+    from celery import Celery
+    main_run(Celery())
