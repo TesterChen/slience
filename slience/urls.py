@@ -21,17 +21,19 @@ from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework import routers
 from accounts import views as accounts_views
 from taskManager import views as taskManager_views
+from reportManager import views as reportManager_views
 
 router = routers.DefaultRouter()
 router.register(r'users',accounts_views.UserViewSet)
 router.register(r'tasks',taskManager_views.PeriodicViewSet)
 router.register(r'schedules',taskManager_views.CrontabScheduleViewSet)
-
+router.register(r'reports',reportManager_views.ReportViewSet)
 
 urlpatterns = [
     url(r'^api/',include(router.urls)),
     path('admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^api-token-auth/', obtain_jwt_token),
+    url(r'^upload/(?P<filename>[^/]+)$', reportManager_views.ReportFileView.as_view()),
 
 ]
