@@ -146,6 +146,24 @@ CELERY_BROKER_URL = 'amqp://guest:guest@127.0.0.1:5672//'
 # CELERY_ACCEPT_CONTENT = ['json']
 CELERY_RESULT_BACKEND = 'redis://'
 
+
+from kombu import Exchange, Queue
+
+default_exchange = Exchange('default', type='direct')
+media_exchange = Exchange('autotest', type='direct')
+
+#定义3个不同的队列
+CELERY_QUEUES = (
+    Queue('default', default_exchange, routing_key='default'),
+    Queue('app', media_exchange, routing_key='autotest.app'),
+    Queue('api', media_exchange, routing_key='autotest.api'),
+    Queue('web', media_exchange, routing_key='autotest.web'),
+    Queue('app_web', media_exchange, routing_key='autotest.app_web'),
+    Queue('app_api', media_exchange, routing_key='autotest.app_api'),
+    Queue('web_api', media_exchange, routing_key='autotest.web_api'),
+    Queue('all', media_exchange, routing_key='autotest.all'),
+)
+
 # CELERY_TASK_SERIALIZER = 'json'
 
 # CORS_ORIGIN_WHITELIST  =(
