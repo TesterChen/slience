@@ -8,3 +8,5 @@ taskManager/utils/code_tmp/*
 reports/*
 taskManager/utils/report.zip
 slience/__pycache__/settings.cpython-36.pyc
+slience/__pycache__/settings.cpython-36.pyc
+slience/__pycache__/urls.cpython-36.pyc

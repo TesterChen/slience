@@ -174,3 +174,6 @@ CELERY_QUEUES = (
 #      'localhost:8001',
 #      'localhost:8000',
 # )
+
+EMAIL_SEND_USERNAME = 'pxnonetest@gmail.com'  # 定时任务报告发送邮箱，支持163,qq,sina,企业qq邮箱等，注意需要开通smtp服务
+EMAIL_SEND_PASSWORD = 'test@pxn.one'     # 邮箱密码

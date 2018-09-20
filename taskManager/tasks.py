@@ -19,14 +19,11 @@ def main_run(self):
     script_path=update_code(repo_name,repo_url)
     #执行脚本
     # run(repo_path+'Scripts/',listener=allure_robotframework())
-    run(script_path,xunit=output_filename,report=None,log=None,output=None)
+    result=run(script_path,xunit=output_filename,report=None,log=None,output=None)
+    print(result)
     #构建报告
     generate_report()
     #上传报告
     upload_report("http://127.0.0.1:8000/upload/%s" % self.request.id)
     #发送报告
 
-
-if __name__ =="__main__":
-    from celery import Celery
-    main_run(Celery())

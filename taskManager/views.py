@@ -1,9 +1,12 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets,views
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from djcelery.models import CrontabSchedule,PeriodicTask
 from taskManager.serialzers import PeriodicTaskSerializer,CrontabScheduleSerializer
+
+from taskManager.tasks import main_run
 # Create your views here.
 
 class PeriodicViewSet(viewsets.ModelViewSet):
@@ -15,3 +18,10 @@ class CrontabScheduleViewSet(viewsets.ModelViewSet):
     queryset = CrontabSchedule.objects.all()
     serializer_class = CrontabScheduleSerializer
     permission_classes = (IsAuthenticated,)
+
+class RunTestView(views.APIView):
+    permission_classes = (IsAuthenticated,)
+    
+    def post(self,request):
+        main_run.apply_async(queue='default')
+        return Response(status=204)

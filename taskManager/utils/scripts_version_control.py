@@ -11,12 +11,12 @@ def update_code(repo_name,url):
         try:
             repo = Repo(local_path)
         except:
-            repo = Repo.clone_from(url, local_path, branch="master")
+            repo = Repo.clone_from(url, local_path, branch="demo")
     else:
         #创建repo文件夹
         os.mkdir(local_path)
         #下载脚本
-        repo = Repo.clone_from(url,local_path,branch="master")
+        repo = Repo.clone_from(url,local_path,branch="demo")
     origin=repo.remotes.origin
     origin.fetch()
     origin.pull()

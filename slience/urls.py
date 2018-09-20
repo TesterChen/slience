@@ -35,5 +35,6 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^upload/(?P<filename>[^/]+)$', reportManager_views.ReportFileView.as_view()),
+    url(r'^run$', taskManager_views.RunTestView.as_view()),
 
 ]
