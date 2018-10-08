@@ -14,9 +14,9 @@ repo_url = 'git://github.com/PengfeiInPxn/PxnAutoTest.git'
 
 
 @shared_task(bind=True)
-def main_run(self):
+def main_run(self,task_name="",reciever="",suite={"name":repo_name,"url":repo_url}):
     #更新脚本
-    script_path=update_code(repo_name,repo_url)
+    script_path=update_code(suite)
     #执行脚本
     # run(repo_path+'Scripts/',listener=allure_robotframework())
     result=run(script_path,xunit=output_filename,report=None,log=None,output=None)

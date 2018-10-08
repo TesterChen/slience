@@ -18,6 +18,8 @@ class CrontabScheduleViewSet(viewsets.ModelViewSet):
     queryset = CrontabSchedule.objects.all()
     serializer_class = CrontabScheduleSerializer
     permission_classes = (IsAuthenticated,)
+    # http_method_names = ["get","post","delete"]
+    
 
 class RunTestView(views.APIView):
     permission_classes = (IsAuthenticated,)

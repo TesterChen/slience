@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets,status
+from rest_framework.response import Response
 from accounts.serializers import UserSerializer
 from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny
@@ -13,7 +14,7 @@ def jwt_response_payload_handler(token, user=None, request=None):
         'token': token,
         'currentAuthority': 'user',
     }
-views.jwt_response_payload_handler=jwt_response_payload_handler
+# views.jwt_response_payload_handler=jwt_response_payload_handler
 
 # api_settings.JWT_RESPONSE_PAYLOAD_HANDLER=jwt_response_payload_handler
 
@@ -24,5 +25,11 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = (AllowAny,)
     
-    def get_queryset(self):
-        return None
+    # def get_queryset(self,request):
+    #     return request.user.objects.all()
+
+    def list(self,request):
+        # user = request.user
+        # serializer = UserSerializer(user)
+        # return Response(serializer.data)
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
