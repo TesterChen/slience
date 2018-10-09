@@ -37,7 +37,7 @@ urlpatterns = [
     url(r'^api/token-auth/', obtain_jwt_token),
     url(r'^api/token-verify/', verify_jwt_token),
     url(r'^api/token-refresh/', refresh_jwt_token),
-    url(r'^upload/(?P<filename>[^/]+)$', reportManager_views.ReportFileView.as_view()),
-    url(r'^run$', taskManager_views.RunTestView.as_view()),
+    url(r'^api/report-upload/(?P<filename>[^/]+)$', reportManager_views.ReportFileView.as_view()),
+    url(r'^api/suite-run/$', taskManager_views.RunTestView.as_view()),
 
 ]

@@ -5,4 +5,4 @@ from rest_framework.validators import UniqueValidator
 class ReportSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Report
-        fields = ('id','name','start_at','status','testsRun','successes','task_id')
+        fields = ('pk','url','name','start_at','status','total','successes','task_id')

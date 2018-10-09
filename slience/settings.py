@@ -146,7 +146,9 @@ REST_FRAMEWORK = {
 CELERY_BROKER_URL = 'amqp://guest:guest@127.0.0.1:5672//' 
 # CELERY_ACCEPT_CONTENT = ['json']
 CELERY_RESULT_BACKEND = 'redis://'
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = 20971520
 
 from kombu import Exchange, Queue
 
