@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'djcelery',
     'taskManager',
     'reportManager',
+    'django_filters',
+    # 'rest_framework_word_filter',
     # 'corsheaders',
 ]
 
@@ -141,6 +143,9 @@ REST_FRAMEWORK = {
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+    ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
     ],
 }
 CELERY_BROKER_URL = 'amqp://guest:guest@127.0.0.1:5672//' 
