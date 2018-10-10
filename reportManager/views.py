@@ -15,6 +15,8 @@ class ReportViewSet(viewsets.ModelViewSet):
     queryset = Report.objects.all()
     serializer_class = ReportSerializer
     permission_classes = (IsAuthenticated,)
+    filter_fields = ('name','status')
+
 
 class ReportFileView(views.APIView):
     permission_classes = (IsAuthenticated,)
