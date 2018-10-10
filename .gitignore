@@ -5,7 +5,7 @@ taskManager/utils/code_tmp/*
 
 .vscode/settings.json
 */migrations/*
-reports/*
+view_report/*
 taskManager/utils/report.zip
 slience/__pycache__/settings.cpython-36.pyc
 slience/__pycache__/settings.cpython-36.pyc
