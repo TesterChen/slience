@@ -17,11 +17,26 @@ class ReportViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
 
 class ReportFileView(views.APIView):
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
     parser_classes = (FileUploadParser,)
+    # parser_classes = (MultiPartParser,)
 
     def put(self,request,filename,format=None):
+        # print(request.data["file"])
+        # kwdata = {
+        #     "name" :request.data["name"],
+        #     "start_at" : request.data["start_at"],
+        #     "status" : request.data["status"],
+        #     "total" : request.data["total"],
+        #     "successes" : request.data["successes"],
+        #     "task_id" : request.data["task_id"],
+        # }
+
         file_obj = request.data['file']
+        # task_id = request.data["task_id"]
+
+        # report = Report.objects.get_or_create(**kwdata)
+        # request.data[""]
         zf = zipfile.ZipFile(file_obj)
         zf.extractall(path='reports/%s' % filename)
         return Response(status=204)

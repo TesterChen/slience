@@ -4,7 +4,9 @@ from git import  Repo
 cur_path= os.path.split(os.path.realpath(__file__))[0]
 code_path = "code_tmp"
 
-def update_code(repo_name,url):
+def update_code(suite):
+    repo_name = suite.get("name")
+    url = suite.get("url")
     local_path=os.path.join(cur_path,code_path,repo_name)
     #如果文件夹不存在就创建
     if os.path.exists(local_path):
