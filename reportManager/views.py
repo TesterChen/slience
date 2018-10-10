@@ -40,6 +40,6 @@ class ReportFileView(views.APIView):
         # report = Report.objects.get_or_create(**kwdata)
         # request.data[""]
         zf = zipfile.ZipFile(file_obj)
-        zf.extractall(path='reports/%s' % filename)
+        zf.extractall(path='view_report/%s' % filename)
         return Response(status=204)
 # Create your views here.
