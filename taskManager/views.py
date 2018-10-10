@@ -5,7 +5,7 @@ from rest_framework.response import Response
 
 from djcelery.models import CrontabSchedule,PeriodicTask
 from taskManager.serialzers import PeriodicTaskSerializer,CrontabScheduleSerializer
-
+# from taskManager.filters import PeriodicTaskFilter,CrontabScheduleFilter
 from taskManager.tasks import main_run
 # Create your views here.
 
@@ -13,11 +13,15 @@ class PeriodicViewSet(viewsets.ModelViewSet):
     queryset = PeriodicTask.objects.all()
     serializer_class = PeriodicTaskSerializer
     permission_classes = (IsAuthenticated,)
+    filter_fields = ('task',)
+    # filter_class = PeriodicTaskFilter
 
 class CrontabScheduleViewSet(viewsets.ModelViewSet):
     queryset = CrontabSchedule.objects.all()
     serializer_class = CrontabScheduleSerializer
     permission_classes = (IsAuthenticated,)
+    
+    # filter_class = CrontabScheduleFilter
     # http_method_names = ["get","post","delete"]
     
 

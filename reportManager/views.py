@@ -15,6 +15,8 @@ class ReportViewSet(viewsets.ModelViewSet):
     queryset = Report.objects.all()
     serializer_class = ReportSerializer
     permission_classes = (IsAuthenticated,)
+    filter_fields = ('name','status')
+
 
 class ReportFileView(views.APIView):
     permission_classes = (IsAuthenticated,)
@@ -38,6 +40,6 @@ class ReportFileView(views.APIView):
         # report = Report.objects.get_or_create(**kwdata)
         # request.data[""]
         zf = zipfile.ZipFile(file_obj)
-        zf.extractall(path='reports/%s' % filename)
+        zf.extractall(path='view_report/%s' % filename)
         return Response(status=204)
 # Create your views here.
