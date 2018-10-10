@@ -17,3 +17,6 @@ slience/__pycache__/wsgi.cpython-36.pyc
 accounts/__pycache__/__init__.cpython-36.pyc
 accounts/__pycache__/serializers.cpython-36.pyc
 accounts/__pycache__/views.cpython-36.pyc
+report.html
+log.html
+celerybeat.pid

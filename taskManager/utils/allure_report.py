@@ -11,8 +11,9 @@ from email.mime.text import MIMEText
 
 # from slience.settings import EMAIL_SEND_USERNAME, EMAIL_SEND_PASSWORD
 
-EMAIL_SEND_USERNAME = 'pxnonetest@gmail.com'  # 定时任务报告发送邮箱，支持163,qq,sina,企业qq邮箱等，注意需要开通smtp服务
-EMAIL_SEND_PASSWORD = 'test@pxn.one'     # 邮箱密码
+EMAIL_SEND_USERNAME = 'test@test.com'  # 定时任务报告发送邮箱，支持163,qq,sina,企业qq邮箱等，注意需要开通smtp服务
+EMAIL_SEND_PASSWORD = '123456'     # 邮箱密码
+USERINFO_FOR_UPLOAD_REPORT = {"username":"test@test.com","password":"123456"}   #上传报告用户信息
 
 cur_path= os.path.split(os.path.realpath(__file__))[0]
 output_path=os.path.join(cur_path,"outputs")
@@ -54,7 +55,7 @@ def upload_report(url,task_id):
     # headers = {
     #     "Content-Type":"multipart/form-data; boundary=----WebKitFormBoundarydEWZnenjYLlunuJP"
     # }
-    r = requests.put(url+task_id,files=files,auth=('yaopengfei@pxn.one', 'wodeshijie123'))
+    r = requests.put(url+task_id,files=files,auth=(USERINFO_FOR_UPLOAD_REPORT["username"], USERINFO_FOR_UPLOAD_REPORT["password"]))
 
 def upload_result(task_name,url,task_id,result):
 
@@ -71,13 +72,28 @@ def upload_result(task_name,url,task_id,result):
             "successes" : result.suite.statistics.all.passed,
             "task_id" : task_id,
         }
-    r = requests.post(url,json=data,auth=('yaopengfei@pxn.one', 'wodeshijie123'))
+    r = requests.post(url,json=data,auth=(USERINFO_FOR_UPLOAD_REPORT["username"], USERINFO_FOR_UPLOAD_REPORT["password"]))
 
 
-def send_email_report(taskinfo,results,url):
+def send_email_report(taskinfo,result,url):
     
     smtp_server='smtp.gmail.com'
-    body = MIMEText("附件为定时任务生成的接口测试报告，请查收，谢谢！", _subtype='html', _charset='utf-8')
+
+    text = """
+    <html>
+        <body>
+            <h1>自动化测试报告</h1>
+            <p>共 %s 个用例，其中 %s 个通过、%s 个失败。运行时间:%s ms</p>
+            <p>请<a href="%s">点击链接<a>查看报告详情</p>
+        </body>
+    </html>
+    """ % (result.suite.statistics.all.total
+            ,result.suite.statistics.all.passed
+            ,result.suite.statistics.all.failed
+            ,result.suite.statistics.all.elapsed
+            ,url)
+
+    body = MIMEText(text,_subtype='html', _charset='utf-8')
     
     msg = MIMEMultipart()
     msg['Subject'] = taskinfo['subject']
