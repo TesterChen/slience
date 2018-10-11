@@ -13,7 +13,7 @@ from email.mime.text import MIMEText
 
 EMAIL_SEND_USERNAME = 'test@test.com'  # 定时任务报告发送邮箱，支持163,qq,sina,企业qq邮箱等，注意需要开通smtp服务
 EMAIL_SEND_PASSWORD = '123456'     # 邮箱密码
-USERINFO_FOR_UPLOAD_REPORT = {"username":"test@test.com","password":"123456"}   #上传报告用户信息
+USERINFO_FOR_UPLOAD_REPORT = {"username":"upload_user@pxn.one","password":"wodeshijie123"}   #上传报告用户信息
 
 cur_path= os.path.split(os.path.realpath(__file__))[0]
 output_path=os.path.join(cur_path,"outputs")
@@ -55,6 +55,7 @@ def upload_report(url,task_id):
     # headers = {
     #     "Content-Type":"multipart/form-data; boundary=----WebKitFormBoundarydEWZnenjYLlunuJP"
     # }
+    print(url+task_id)
     r = requests.put(url+task_id,files=files,auth=(USERINFO_FOR_UPLOAD_REPORT["username"], USERINFO_FOR_UPLOAD_REPORT["password"]))
 
 def upload_result(task_name,url,task_id,result):

@@ -132,6 +132,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static/'
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -163,13 +164,13 @@ media_exchange = Exchange('autotest', type='direct')
 #定义3个不同的队列
 CELERY_QUEUES = (
     Queue('default', default_exchange, routing_key='default'),
-    Queue('app', media_exchange, routing_key='autotest.app'),
-    Queue('api', media_exchange, routing_key='autotest.api'),
-    Queue('web', media_exchange, routing_key='autotest.web'),
-    Queue('app_web', media_exchange, routing_key='autotest.app_web'),
-    Queue('app_api', media_exchange, routing_key='autotest.app_api'),
-    Queue('web_api', media_exchange, routing_key='autotest.web_api'),
-    Queue('all', media_exchange, routing_key='autotest.all'),
+    Queue('APP', media_exchange, routing_key='autotest.app'),
+    Queue('API', media_exchange, routing_key='autotest.api'),
+    Queue('WEB', media_exchange, routing_key='autotest.web'),
+    Queue('APP_WEB', media_exchange, routing_key='autotest.app_web'),
+    Queue('APP_API', media_exchange, routing_key='autotest.app_api'),
+    Queue('API_WEB', media_exchange, routing_key='autotest.web_api'),
+    Queue('API_APP_WEB', media_exchange, routing_key='autotest.all'),
 )
 
 # CELERY_TASK_SERIALIZER = 'json'
@@ -183,8 +184,8 @@ CELERY_QUEUES = (
 #      'localhost:8000',
 # )
 
-EMAIL_SEND_USERNAME = 'pxnonetest@gmail.com'  # 定时任务报告发送邮箱，支持163,qq,sina,企业qq邮箱等，注意需要开通smtp服务
-EMAIL_SEND_PASSWORD = 'test@pxn.one'     # 邮箱密码
+EMAIL_SEND_USERNAME = 'test@test.com'  # 定时任务报告发送邮箱，支持163,qq,sina,企业qq邮箱等，注意需要开通smtp服务
+EMAIL_SEND_PASSWORD = '123456'     # 邮箱密码
 
 JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
