@@ -17,6 +17,7 @@ class PeriodicTaskSerializer(serializers.ModelSerializer):
 
     def create(self,validated_data):
         crontab_data = validated_data.pop('crontab')
-        crontab = CrontabSchedule.objects.get_or_create(**crontab_data)
+        
+        crontab,new = CrontabSchedule.objects.get_or_create(**crontab_data)
         task = PeriodicTask.objects.create(crontab=crontab,**validated_data)
         return task
