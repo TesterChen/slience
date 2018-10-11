@@ -13,7 +13,7 @@ import os
 #一期先硬编码,待项目管理功能开发完成后由task入参
 REPO_NAME = 'PxnAutoTest'
 REPO_URL = 'git@github.com:pxn-qa-team/PxnAutoTest.git'
-SERVER_URL = 'http://127.0.0.1'
+SERVER_URL = 'http://35.188.112.90'
 
 
 @shared_task(bind=True)
